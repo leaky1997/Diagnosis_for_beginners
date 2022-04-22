@@ -1,0 +1,723 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{cnndemo1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{CNN诊断代码Demo}\label{cnnux8bcaux65adux4ee3ux7801demo}
+
+\subsection{阅读该代码之后需要习得一下几点：}\label{ux9605ux8bfbux8be5ux4ee3ux7801ux4e4bux540eux9700ux8981ux4e60ux5f97ux4e00ux4e0bux51e0ux70b9}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  编写智能故障诊断代码的基本逻辑
+
+  \begin{itemize}
+  \tightlist
+  \item
+    数据导入
+  \item
+    数据预处理
+  \item
+    模型建立
+  \item
+    模型训练（本demo，其他的请看相应的函数）
+  \item
+    模型评估与测试 （本demo包括模型评估）
+  \end{itemize}
+\item
+  编写代码的基本规范
+
+  \begin{itemize}
+  \tightlist
+  \item
+    注释
+  \item
+    空格
+  \item
+    变量命名
+  \item
+    其他请参考
+    \href{https://github.com/shendeguize/GooglePythonStyleGuideCN}{Google
+    代码风格}中的第三部分
+  \end{itemize}
+\item
+  本代码只提供了一个主程序的逻辑，其他相关内容请参考我的\href{https://gitee.com/Leaky/diagnosis_for_beginners}{仓库}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    欢迎师弟师妹一起来贡献仓库，如果觉得麻烦可以把代码发给管理员来更新。
+  \end{itemize}
+\item
+  本demo文件逻辑
+
+  \begin{itemize}
+  \tightlist
+  \item
+    sets.mat \textbf{数据集}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      训练集
+    \item
+      测试集
+    \end{itemize}
+  \item
+    Demo 1 CNN.py or Demo 1 CNN.ipynb \textbf{主程序}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      诊断模型类
+
+      \begin{itemize}
+      \tightlist
+      \item
+        fit 训练
+      \item
+        evaluation 评估
+      \end{itemize}
+    \item
+      数据读取
+    \end{itemize}
+  \item
+    cnn\_model.py \textbf{模型程序}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      自定义模块，例如1X1卷积
+    \item
+      利用框架构架模型，明确输入输出的size
+    \item
+      主程序随机生成input 测试模型骨架
+    \end{itemize}
+  \item
+    readdata.py \textbf{数据预处理}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      shuru 原始数据读取
+    \item
+      norm 可以采用sklearn中的库
+    \item
+      sampling 从序列中采样样本
+    \item
+      readdata类 实现读取-数据预处理-采样的工作流，构建一个样本
+    \item
+      dataset 在readdata的基础上重复执行readdate的流，来构建数据集
+    \item
+      主程序 input 数据集地址
+    \end{itemize}
+  \item
+    utils.py \textbf{其他工具}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      lossplot 绘制loss
+    \item
+      accplot 绘制acc
+    \item
+      figscat 绘制散点图
+    \item
+      print\_network 打印网络结构
+    \item
+      initialize\_weights 初始化网络参数， xavier 还是kaiming
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  首先是在程序最开始时，使用文档字符串注释（'''或"""建议统一为双引号）
+\item
+  导入python库
+\item
+  其他见备注
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} kaggle 上需要切换工作目录，以下是相关指令}
+        \PY{c+c1}{\PYZsh{} import os}
+        \PY{c+c1}{\PYZsh{} os.getcwd()}
+        \PY{c+c1}{\PYZsh{} os.chdir(\PYZsq{}/kaggle/input/diagnosis\PYZhy{}for\PYZhy{}beginner/CNNdemo1\PYZsq{})}
+        \PY{c+c1}{\PYZsh{} os.getcwd()}
+        \PY{c+c1}{\PYZsh{} ! pip install xlrd}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+ch}{\PYZsh{}!/usr/bin/env python3}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}*\PYZhy{} coding: utf\PYZhy{}8 \PYZhy{}*\PYZhy{}}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}一个对CWRU数据集利用CNN进行诊断的Demo}
+        
+        \PY{l+s+sd}{数据集已经处理好，可以直接执行程序，只对该程序详细注释。}
+        \PY{l+s+sd}{根据代码规范不要描述代码,假定阅读代码的人比你更精通Python(他只是不知道你试图做什么)。}
+        \PY{l+s+sd}{这个demo为了师弟师妹更好理解，对代码进行了一定程度的描述，后续的程序只针对功能进行描述。}
+        \PY{l+s+sd}{需要注意的是，测试数据不应该以任何形式在训练阶段出现，这是19年的代码，可能存在部分逻辑问题。}
+        
+        \PY{l+s+sd}{    Enviroment：}
+        \PY{l+s+sd}{        pytorch 0.4 有点老了，后续会更新新版本的demo}
+        
+        \PY{l+s+sd}{    Typical usage example：}
+        
+        \PY{l+s+sd}{    diag=Diagnosis(n\PYZus{}class=10,lr=0.001,batch\PYZus{}size=64,num\PYZus{}train=200)}
+        \PY{l+s+sd}{    datadir=\PYZsq{}sets.mat\PYZsq{}}
+        \PY{l+s+sd}{    x\PYZus{}train,y\PYZus{}train,x\PYZus{}test,y\PYZus{}test=data\PYZus{}reader(datadir)}
+        \PY{l+s+sd}{    diag.fit(x\PYZus{}train,y\PYZus{}train,x\PYZus{}test,y\PYZus{}test,epoches=10)}
+        \PY{l+s+sd}{    diag.evaluation(x\PYZus{}test,y\PYZus{}test)    }
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{Created on Tue Jul  9 09:13:34 2019}
+        
+        \PY{l+s+sd}{@author: liqi}
+        
+        \PY{l+s+sd}{Todo：完善各部分功能，但该demo应该不会修改了。}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{k+kn}{from} \PY{n+nn}{readdata} \PY{k}{import} \PY{n}{dataset}  \PY{c+c1}{\PYZsh{} 数据读取模块 为了提升易读性,行注释应该至少在代码2个空格后,并以\PYZsh{}后接至少1个空格开始注释部分.}
+        \PY{k+kn}{from} \PY{n+nn}{cnn\PYZus{}model} \PY{k}{import} \PY{n}{CNNmodel}  \PY{c+c1}{\PYZsh{} 模型模块}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{from} \PY{n+nn}{os}\PY{n+nn}{.}\PY{n+nn}{path} \PY{k}{import} \PY{n}{splitext}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}  \PY{c+c1}{\PYZsh{} 科学处理库}
+        \PY{k+kn}{import} \PY{n+nn}{os}  \PY{c+c1}{\PYZsh{} os 操作库}
+        \PY{k+kn}{import} \PY{n+nn}{time}  \PY{c+c1}{\PYZsh{}  时间库}
+        \PY{k+kn}{import} \PY{n+nn}{torch}  \PY{c+c1}{\PYZsh{} pytorch }
+        \PY{k+kn}{from} \PY{n+nn}{torch} \PY{k}{import} \PY{n}{nn}\PY{p}{,} \PY{n}{optim} \PY{c+c1}{\PYZsh{} 神经网络， 优化的模块}
+        \PY{k+kn}{from} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{data} \PY{k}{import} \PY{n}{DataLoader}\PY{p}{,}\PY{n}{TensorDataset}  \PY{c+c1}{\PYZsh{} torch 数据导入模块}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}  
+        \PY{k+kn}{import} \PY{n+nn}{utils}  \PY{c+c1}{\PYZsh{} 功能}
+\end{Verbatim}
+
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+以下定义了一个诊断的类。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{class} \PY{n+nc}{Diagnosis}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}训练诊断模型 \PYZsh{}一句话概括这个类的功能 }
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    其他信息}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Attributes（可选，可以强调重要的属性）：}
+        \PY{l+s+sd}{        net：选用的诊断模型}
+        \PY{l+s+sd}{        gpu: }
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{n\PYZus{}class}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,}\PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{,}\PY{n}{num\PYZus{}train}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,}\PY{n}{gpu}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{save\PYZus{}dir}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{save\PYZus{}dir}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}初始化函数}
+        \PY{l+s+sd}{        函数应有文档字符串,除非符合以下所有条件:}
+        \PY{l+s+sd}{        外部不可见}
+        \PY{l+s+sd}{        非常短}
+        \PY{l+s+sd}{        简明}
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{diagnosis begin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{net}\PY{o}{=}\PY{n}{CNNmodel}\PY{p}{(}\PY{n}{input\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{,}\PY{n}{class\PYZus{}num}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gpu}\PY{o}{=}\PY{n}{gpu}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{save\PYZus{}dir}\PY{o}{=}\PY{n}{save\PYZus{}dir}
+                \PY{k}{if} \PY{o+ow}{not} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{exists}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{save\PYZus{}dir}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{os}\PY{o}{.}\PY{n}{makedirs}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{save\PYZus{}dir}\PY{p}{)}
+                \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gpu}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{net}\PY{o}{.}\PY{n}{cuda}\PY{p}{(}\PY{p}{)}
+                
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lr}\PY{o}{=}\PY{n}{lr}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{optimizer} \PY{o}{=} \PY{n}{optim}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{net}\PY{o}{.}\PY{n}{parameters}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lr}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{scheduler} \PY{o}{=} \PY{n}{optim}\PY{o}{.}\PY{n}{lr\PYZus{}scheduler}\PY{o}{.}\PY{n}{StepLR}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{optimizer}\PY{p}{,}\PY{n}{step\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{gamma} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{lr}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{loss\PYZus{}function} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{CrossEntropyLoss}\PY{p}{(}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}hist} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}  \PY{c+c1}{\PYZsh{} 变量命名采用下划线的方式比如该字典代表训练记录 上面的loss\PYZus{}function 代表损失函数}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{acc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testloss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testacc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+                \PY{c+c1}{\PYZsh{} 方法的前后建议空一行}
+            \PY{k}{def} \PY{n+nf}{caculate\PYZus{}acc}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{prediction}\PY{p}{,}\PY{n}{y\PYZus{}}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{        计算acc}
+        \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                \PY{n}{correct} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{cuda}\PY{p}{(}\PY{p}{)}
+                \PY{n}{total} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{cuda}\PY{p}{(}\PY{p}{)}
+                \PY{n}{correct} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{prediction} \PY{o}{==} \PY{n}{y\PYZus{}}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{float}\PY{p}{(}\PY{p}{)}
+                \PY{n}{total}\PY{o}{+}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}}\PY{p}{)} 
+                \PY{n}{acc}\PY{o}{=}\PY{p}{(}\PY{n}{correct}\PY{o}{/}\PY{n}{total}\PY{p}{)}\PY{o}{.}\PY{n}{cpu}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{detach}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{numpy}\PY{p}{(}\PY{p}{)}
+                \PY{k}{return} \PY{n}{acc}
+                
+            \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{x\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{x\PYZus{}test}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,}\PY{n}{epoches}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} fit方法（重要的函数需要详细描述功能）}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        Args:}
+        \PY{l+s+sd}{            x\PYZus{}train: 训练集数据}
+        \PY{l+s+sd}{            y\PYZus{}train: 训练集标签}
+        \PY{l+s+sd}{            x\PYZus{}test:测试数据}
+        \PY{l+s+sd}{            y\PYZus{}test:测试标签}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        Return：}
+        \PY{l+s+sd}{            训练log ，后续会有专门的log方法，该demo先直接用字典记录}
+        \PY{l+s+sd}{            }
+        \PY{l+s+sd}{        Raises(可选)：}
+        \PY{l+s+sd}{            写error的地方}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{training start!!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}        
+                \PY{k}{if} \PY{n}{x\PYZus{}test}\PY{o}{.}\PY{n}{numpy}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}\PY{o}{==}\PY{k+kc}{None}\PY{p}{:}
+                    \PY{n}{test\PYZus{}flag}\PY{o}{=}\PY{k+kc}{None}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{test\PYZus{}flag}\PY{o}{=}\PY{k+kc}{True}
+                    
+                \PY{n}{torch\PYZus{}dataset} \PY{o}{=} \PY{n}{TensorDataset}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 读取数据}
+                \PY{n}{loader} \PY{o}{=}\PY{n}{DataLoader}\PY{p}{(}
+                    \PY{n}{dataset}\PY{o}{=}\PY{n}{torch\PYZus{}dataset}\PY{p}{,}     
+                    \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,}      
+                    \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}               
+                    \PY{n}{num\PYZus{}workers}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}              
+                    \PY{p}{)}
+                \PY{n}{whole\PYZus{}time}\PY{o}{=}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+                \PY{k}{for} \PY{n}{epoch} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{epoches}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} 训练开始epoches循环}
+                    \PY{n}{loss\PYZus{}epoch}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+                    \PY{n}{acc\PYZus{}epoch}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        
+                    
+                    \PY{n}{epoch\PYZus{}start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+                    \PY{k}{for} \PY{n+nb}{iter}\PY{p}{,} \PY{p}{(}\PY{n}{x\PYZus{}}\PY{p}{,} \PY{n}{y\PYZus{}}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{loader}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{}一次迭代一个batch}
+                        \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gpu}\PY{p}{:}
+                            \PY{n}{x\PYZus{}}\PY{p}{,} \PY{n}{y\PYZus{}} \PY{o}{=} \PY{n}{x\PYZus{}}\PY{o}{.}\PY{n}{cuda}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{y\PYZus{}}\PY{o}{.}\PY{n}{cuda}\PY{p}{(}\PY{p}{)}
+                        \PY{c+c1}{\PYZsh{} ============================}
+                        \PY{c+c1}{\PYZsh{} 可以在复杂操作前进行块注释}
+                        \PY{c+c1}{\PYZsh{} 接下来是进行训练的阶段}
+                        \PY{c+c1}{\PYZsh{} 前向传播\PYZhy{}计算损失\PYZhy{}反向传播\PYZhy{}优化器更新模型}
+                        \PY{c+c1}{\PYZsh{} =============================}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{optimizer}\PY{o}{.}\PY{n}{zero\PYZus{}grad}\PY{p}{(}\PY{p}{)}
+                        \PY{n}{y\PYZus{}pre} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{net}\PY{p}{(}\PY{n}{x\PYZus{}}\PY{p}{)}
+                        \PY{n}{loss} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{loss\PYZus{}function}\PY{p}{(}\PY{n}{y\PYZus{}pre}\PY{p}{,} \PY{n}{torch}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{y\PYZus{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}          
+                        \PY{n}{prediction} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y\PYZus{}pre}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+                        \PY{n}{y\PYZus{}}\PY{o}{=}\PY{n}{torch}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y\PYZus{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                        \PY{n}{loss\PYZus{}epoch}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{loss}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                        \PY{n}{loss}\PY{o}{.}\PY{n}{backward}\PY{p}{(}\PY{p}{)}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{optimizer}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{p}{)}
+                        \PY{c+c1}{\PYZsh{} ============================}
+                        \PY{n}{acc}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{caculate\PYZus{}acc}\PY{p}{(}\PY{n}{prediction}\PY{p}{,}\PY{n}{y\PYZus{}}\PY{p}{)}            
+                        \PY{n}{acc\PYZus{}epoch}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{acc}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 计算acc                }
+                    \PY{n}{epoch\PYZus{}end\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{loss}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{loss\PYZus{}epoch}\PY{p}{)}
+                    \PY{n}{acc}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{acc\PYZus{}epoch}\PY{p}{)}
+                    \PY{n}{epoch\PYZus{}time}\PY{o}{=}\PY{n}{epoch\PYZus{}end\PYZus{}time}\PY{o}{\PYZhy{}}\PY{n}{epoch\PYZus{}start\PYZus{}time}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{loss}\PY{p}{)}         
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{acc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{acc}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{test\PYZus{}flag}\PY{p}{:}
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{evaluation}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{o}{=}\PY{n}{x\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{train\PYZus{}step}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{epoch}\PY{o}{\PYZpc{}}\PY{k}{10}==0:
+                        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Epoch: [}\PY{l+s+si}{\PYZpc{}2d}\PY{l+s+s2}{] Epoch\PYZus{}time:  [}\PY{l+s+si}{\PYZpc{}8f}\PY{l+s+s2}{] }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ loss: }\PY{l+s+si}{\PYZpc{}.8f}\PY{l+s+s2}{, acc:}\PY{l+s+si}{\PYZpc{}.8f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}  \PY{c+c1}{\PYZsh{}打印日志}
+                                      \PY{p}{(}\PY{p}{(}\PY{n}{epoch} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{epoch\PYZus{}time}\PY{p}{,}\PY{n}{loss}\PY{p}{,}\PY{n}{acc}\PY{p}{)}\PY{p}{)}
+                \PY{n}{total\PYZus{}time}\PY{o}{=}\PY{n}{epoch\PYZus{}end\PYZus{}time}\PY{o}{\PYZhy{}}\PY{n}{whole\PYZus{}time}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total time: }\PY{l+s+si}{\PYZpc{}2d}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{k}{total\PYZus{}time})
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best acc: }\PY{l+s+si}{\PYZpc{}4f}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{acc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best testacc: }\PY{l+s+si}{\PYZpc{}4f}\PY{l+s+s1}{\PYZsq{}}\PY{o}{\PYZpc{}}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testacc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}                
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{save\PYZus{}his}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{}保存日志}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{save\PYZus{}prediction}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=========训练完成=========}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}        
+                \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}hist}
+            \PY{k}{def} \PY{n+nf}{evaluation}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{x\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{train\PYZus{}step}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} 评估方法用于验证或者测试}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        Args:}
+        \PY{l+s+sd}{            x\PYZus{}test:测试数据}
+        \PY{l+s+sd}{            y\PYZus{}test:测试标签}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        Return：}
+        \PY{l+s+sd}{            训练log ，后续会有专门的log方法，该demo先直接用字典记录}
+        \PY{l+s+sd}{            }
+        \PY{l+s+sd}{        Raises(可选)：}
+        \PY{l+s+sd}{            写error的地方}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{evaluation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{net}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{}进入eval模式，相应的权重更新或者drop的更新关闭}
+                \PY{k}{with} \PY{n}{torch}\PY{o}{.}\PY{n}{no\PYZus{}grad}\PY{p}{(}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{}关闭梯度计算}
+                    \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gpu}\PY{p}{:}
+                        \PY{n}{x\PYZus{}test}\PY{o}{=}\PY{n}{x\PYZus{}test}\PY{o}{.}\PY{n}{cuda}\PY{p}{(}\PY{p}{)}
+                        \PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{cuda}\PY{p}{(}\PY{p}{)}            
+                    \PY{n}{y\PYZus{}test\PYZus{}ori}\PY{o}{=}\PY{n}{torch}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                    \PY{n}{y\PYZus{}test\PYZus{}pre}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{net}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{)}
+                    \PY{n}{test\PYZus{}loss}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{loss\PYZus{}function}\PY{p}{(}\PY{n}{y\PYZus{}test\PYZus{}pre}\PY{p}{,}\PY{n}{y\PYZus{}test\PYZus{}ori}\PY{p}{)}
+                    \PY{n}{y\PYZus{}tset\PYZus{}pre}\PY{o}{=}\PY{n}{torch}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{y\PYZus{}test\PYZus{}pre}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                    \PY{n}{acc}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{caculate\PYZus{}acc}\PY{p}{(}\PY{n}{y\PYZus{}tset\PYZus{}pre}\PY{p}{,}\PY{n}{y\PYZus{}test\PYZus{}ori}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{***}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{test result }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ loss: }\PY{l+s+si}{\PYZpc{}.8f}\PY{l+s+s2}{, acc:}\PY{l+s+si}{\PYZpc{}.4f}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{***}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}}
+                      \PY{p}{(}\PY{n}{test\PYZus{}loss}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                       \PY{n}{acc}\PY{p}{)}\PY{p}{)}
+                \PY{k}{if} \PY{n}{train\PYZus{}step}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testloss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{test\PYZus{}loss}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testacc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{acc}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{acc}\PY{o}{\PYZgt{}}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testacc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{p}{:}      
+                        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{p}{)}
+                        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ a better model is saved}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{net}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{p}{)}
+                \PY{k}{return} \PY{n}{test\PYZus{}loss}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{acc}
+            \PY{k}{def} \PY{n+nf}{save}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{        save model and its parameters}
+        \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                \PY{n}{torch}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{net}\PY{o}{.}\PY{n}{state\PYZus{}dict}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{save\PYZus{}dir}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/net\PYZus{}parameters.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                
+            \PY{k}{def} \PY{n+nf}{save\PYZus{}prediction}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{data}\PY{p}{,}\PY{n}{data\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{        save prediction}
+        \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{gpu}\PY{p}{:}
+                    \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{cuda}\PY{p}{(}\PY{p}{)}
+                \PY{n}{final\PYZus{}pre}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{net}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+                \PY{n}{final\PYZus{}pre}\PY{o}{=}\PY{n}{torch}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{final\PYZus{}pre}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{cpu}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{detach}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{numpy}\PY{p}{(}\PY{p}{)}
+                \PY{n}{dic}\PY{o}{=}\PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+                \PY{n}{dic}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+                \PY{n}{dic}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{final\PYZus{}pre}
+                \PY{n}{prediction}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{dic}\PY{p}{)}
+                \PY{n}{prediction}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{save\PYZus{}dir}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n}{data\PYZus{}name}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prediction.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{def} \PY{n+nf}{save\PYZus{}his}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{        save history}
+        \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                \PY{n}{data\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}hist}\PY{p}{)}
+                \PY{n}{data\PYZus{}df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{save\PYZus{}dir}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/history.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{def} \PY{n+nf}{load}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{        load model}
+        \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{net}\PY{o}{.}\PY{n}{load\PYZus{}state\PYZus{}dict}\PY{p}{(}\PY{n}{torch}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{save\PYZus{}dir} \PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/net\PYZus{}parameters.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{data\PYZus{}reader}\PY{p}{(}\PY{n}{datadir}\PY{p}{,}\PY{n}{gpu}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    read data from mat or other file after readdata.py}
+        \PY{l+s+sd}{    demo只展示了mat的读取}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{n}{datatype}\PY{o}{=}\PY{n}{splitext}\PY{p}{(}\PY{n}{datadir}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+            \PY{k}{if} \PY{n}{datatype}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.mat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+        
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datatype is mat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+                \PY{n}{data}\PY{o}{=}\PY{n}{scipy}\PY{o}{.}\PY{n}{io}\PY{o}{.}\PY{n}{loadmat}\PY{p}{(}\PY{n}{datadir}\PY{p}{)}
+                
+                \PY{n}{x\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{n}{x\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}     
+                \PY{n}{y\PYZus{}train}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}     
+                \PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            \PY{k}{if} \PY{n}{datatype}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{k}{pass}
+            
+            \PY{n}{x\PYZus{}train}\PY{o}{=}\PY{n}{torch}\PY{o}{.}\PY{n}{from\PYZus{}numpy}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{)}
+            \PY{n}{y\PYZus{}train}\PY{o}{=}\PY{n}{torch}\PY{o}{.}\PY{n}{from\PYZus{}numpy}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}
+            \PY{n}{x\PYZus{}test}\PY{o}{=}\PY{n}{torch}\PY{o}{.}\PY{n}{from\PYZus{}numpy}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{)}
+            \PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{torch}\PY{o}{.}\PY{n}{from\PYZus{}numpy}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}
+            \PY{k}{return} \PY{n}{x\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{x\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}
+\end{Verbatim}
+
+
+    下面是主程序，使用\texttt{if\ \_\_name\_\_\ ==\ \textquotesingle{}\_\_main\_\_\textquotesingle{}:}
+的原因是避免被作为方法导入时执行下面的操作
+精度较高的原因是CWRU的频谱特征比较明显，在数据预处理后的数据比较好分类
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{if} \PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+            \PY{n}{diag}\PY{o}{=}\PY{n}{Diagnosis}\PY{p}{(}\PY{n}{n\PYZus{}class}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,}\PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{,}
+                           \PY{n}{num\PYZus{}train}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{,}\PY{n}{gpu}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{save\PYZus{}dir}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/kaggle/working/save\PYZus{}dir}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{}实例化诊断类 有GPU的请让变量gpu=True}
+            \PY{n}{datadir}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sets.mat}\PY{l+s+s1}{\PYZsq{}}  \PY{c+c1}{\PYZsh{} 数据集}
+            \PY{n}{x\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{x\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{o}{=}\PY{n}{data\PYZus{}reader}\PY{p}{(}\PY{n}{datadir}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 数据读取}
+            \PY{n}{diag}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{x\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{epoches}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}  \PY{c+c1}{\PYZsh{} fit模型}
+            \PY{n}{diag}\PY{o}{.}\PY{n}{evaluation}\PY{p}{(}\PY{n}{x\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 评估模型}
+            \PY{n}{utils}\PY{o}{.}\PY{n}{print\PYZus{}network}\PY{p}{(}\PY{n}{diag}\PY{o}{.}\PY{n}{net}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 展示模型结构}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
