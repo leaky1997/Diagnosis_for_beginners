@@ -38,7 +38,8 @@ todo
 see [papers](/papers.md)
 # Useful link
 ## 论文阅读
-
+## 讲座
+1. JDMD[创刊](https://play.yunxi.tv/livestream/9a314f31e1a14fb2b5d8554dabc34814)
 
 # Contact
 350141050[at]qq[dot]com
